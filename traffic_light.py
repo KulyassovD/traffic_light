@@ -1,10 +1,38 @@
 import datetime
 from tkinter import *
+from tkinter import Tk, Label
 from dataclasses import dataclass
 from typing import Dict, Type
 
+
+class CountdownTimer(Tk):
+    def __init__(self):
+        super().__init__()
+        self.label_secs = Label(self, text="0",  bg="white")
+        self.label_secs.grid(row=1, column=3)
+        self.rem_seconds = (data_dict['red_a']-1000)/1000
+        self.after(1000, self.start_countdown)
+
+    def start_countdown(self):
+        if self.rem_seconds == -1:
+            self.rem_seconds = (data_dict['red_s']-1000)/1000
+            self.start_countdown1()
+        else:
+            self.label_secs.configure(text="%d" % self.rem_seconds)
+            self.rem_seconds -= 1
+            self.after(1000, self.start_countdown)
+
+    def start_countdown1(self):
+        if self.rem_seconds == -1:
+            self.rem_seconds = (data_dict['red_a']-1000)/1000
+            self.start_countdown()
+        else:
+            self.label_secs.configure(text="%d" % self.rem_seconds)
+            self.rem_seconds -= 1
+            self.after(1000, self.start_countdown1)
+
+
 class Frame(Tk):
- 
     def __init__(self):
         self.state = 0
         super().__init__()
@@ -22,9 +50,8 @@ class Frame(Tk):
         self.green = c1.create_oval(20, 260, 120, 360, fill='#00ff00')
         c1.pack()
         self.update()
-        self.after(2000, self.upd1)
-        self.after(2000, self.upd)
-        
+        self.after(1000, self.upd1)
+        self.after(1000, self.upd)
 
     def upd(self):
         """Время зеленого Шаляпина"""
@@ -133,10 +160,8 @@ class Frame(Tk):
             self.canvas1.itemconfigure(self.yellow, fill='#ffff00')
             self.canvas1.itemconfigure(self.green, fill='#008000')
             self.after(data_dict['yellow_a'], self.upd1)
-        
-        
-            
-    
+
+
 @dataclass
 class InfoMessage:
     W: int
@@ -148,51 +173,60 @@ class InfoMessage:
     day = datetime.time(10)
     evening = datetime.time(17)
     night = datetime.time(20)
-    
+
     def comparison(self):
-        if self.now_time == self.morning and self.W  > 20:
+        """Функция сравнения"""
+        if self.now_time == self.morning and (self.E or self.W) > 20:
             global data_dict
-            data_dict = {'red_s':5800,
-                         'yellow_s':300, 
-                         'green_s':6000,
-                         'red_a':9300,
-                         'yellow_a': 300,
-                         'green_a': 2500,
+            data_dict = {'red_s':8000,
+                         'yellow_s':1000,
+                         'green_s':10000,
+                         'red_a':14000,
+                         'yellow_a': 1000,
+                         'green_a': 4000,
                          'name': 'Утро Шаляпина- Алтынсарина'}
+            app = CountdownTimer()
             root = Frame()
+            app.mainloop()
             root.mainloop()
             return data_dict
         elif self.now_time == self.day:
-            data_dict = {'red_s':3000, 
-                         'yellow_s':300, 
-                         'green_s':4500,
-                         'red_a':4500,
-                         'yellow_a': 300,
-                         'green_a': 3000,
+            data_dict = {'red_s':9000,
+                         'yellow_s':1000,
+                         'green_s':7000,
+                         'red_a':11000,
+                         'yellow_a': 1000,
+                         'green_a': 5000,
                          'name': 'День Шаляпина- Алтынсарина'}
+            app = CountdownTimer()
             root = Frame()
+            app.mainloop()
             root.mainloop()
             return data_dict
-        elif self.now_time == self.evening and self.E  > 20:
-            data_dict = {'red_s':2500, 
-                         'yellow_s':300, 
-                         'green_s':6000,
-                         'red_a':6000,
-                         'yellow_a': 300,
-                         'green_a': 2500,
+        elif self.now_time == self.evening and (self.E or self.W)  > 20:
+            data_dict = {'red_s':8000,
+                         'yellow_s':1000,
+                         'green_s':10000,
+                         'red_a':14000,
+                         'yellow_a': 1000,
+                         'green_a': 4000,
                          'name': 'Вечер Шаляпина- Алтынсарина'}
+            app = CountdownTimer()
             root = Frame()
+            app.mainloop()
             root.mainloop()
             return data_dict
         elif self.now_time == self.night:
-            data_dict = {'red_s':3000, 
-                         'yellow_s':300, 
-                         'green_s':4500,
-                         'red_a':4500,
-                         'yellow_a': 300,
-                         'green_a': 3000,
+            data_dict = {'red_s':9000,
+                         'yellow_s':1000,
+                         'green_s':7000,
+                         'red_a':11000,
+                         'yellow_a': 1000,
+                         'green_a': 5000,
                          'name': 'Ночь Шаляпина- Алтынсарина'}
+            app = CountdownTimer()
             root = Frame()
+            app.mainloop()
             root.mainloop()
             return data_dict
 
@@ -214,7 +248,7 @@ def main(traffic: InfoMessage) -> None:
 if __name__ == '__main__':
     """водимые данные"""
     packages = [
-        ('PAC', [42, 12, 10, 8, datetime.time(8)]),
+        ('PAC', [15, 21, 10, 8, datetime.time(8)]),
         ('PAC_2', [42, 10, 75, 8, datetime.time(10)]),
         ('PAC_3', [12, 45, 30, 12, datetime.time(17)]),
     ]
@@ -222,5 +256,3 @@ if __name__ == '__main__':
     for workout_type, data in packages:
         training = read_package(workout_type, data)
         main(training)
-    
-
