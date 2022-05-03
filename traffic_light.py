@@ -178,12 +178,12 @@ class InfoMessage:
         """Функция сравнения"""
         if self.now_time == self.morning and (self.E or self.W) > 20:
             global data_dict
-            data_dict = {'red_s':8000,
+            data_dict = {'red_s':6000,
                          'yellow_s':1000,
-                         'green_s':10000,
-                         'red_a':14000,
+                         'green_s':14000,
+                         'red_a':18000,
                          'yellow_a': 1000,
-                         'green_a': 4000,
+                         'green_a': 2000,
                          'name': 'Утро Шаляпина- Алтынсарина'}
             app = CountdownTimer()
             root = Frame()
@@ -191,12 +191,12 @@ class InfoMessage:
             root.mainloop()
             return data_dict
         elif self.now_time == self.day:
-            data_dict = {'red_s':9000,
+            data_dict = {'red_s':8000,
                          'yellow_s':1000,
-                         'green_s':7000,
-                         'red_a':11000,
+                         'green_s':11000,
+                         'red_a':15000,
                          'yellow_a': 1000,
-                         'green_a': 5000,
+                         'green_a': 4000,
                          'name': 'День Шаляпина- Алтынсарина'}
             app = CountdownTimer()
             root = Frame()
@@ -204,12 +204,12 @@ class InfoMessage:
             root.mainloop()
             return data_dict
         elif self.now_time == self.evening and (self.E or self.W)  > 20:
-            data_dict = {'red_s':8000,
+            data_dict = {'red_s':6000,
                          'yellow_s':1000,
-                         'green_s':10000,
-                         'red_a':14000,
+                         'green_s':14000,
+                         'red_a':18000,
                          'yellow_a': 1000,
-                         'green_a': 4000,
+                         'green_a': 2000,
                          'name': 'Вечер Шаляпина- Алтынсарина'}
             app = CountdownTimer()
             root = Frame()
@@ -217,12 +217,12 @@ class InfoMessage:
             root.mainloop()
             return data_dict
         elif self.now_time == self.night:
-            data_dict = {'red_s':9000,
+            data_dict = {'red_s':7000,
                          'yellow_s':1000,
-                         'green_s':7000,
-                         'red_a':11000,
+                         'green_s':11000,
+                         'red_a':14000,
                          'yellow_a': 1000,
-                         'green_a': 5000,
+                         'green_a': 3000,
                          'name': 'Ночь Шаляпина- Алтынсарина'}
             app = CountdownTimer()
             root = Frame()
@@ -242,7 +242,6 @@ def read_package(workout_type: str, data: int) -> InfoMessage:
 def main(traffic: InfoMessage) -> None:
     """Главная функция."""
     traffic.comparison()
-
 
 
 if __name__ == '__main__':
