@@ -190,19 +190,6 @@ class InfoMessage:
             app.mainloop()
             root.mainloop()
             return data_dict
-        elif self.now_time == self.day:
-            data_dict = {'red_s':8000,
-                         'yellow_s':1000,
-                         'green_s':11000,
-                         'red_a':15000,
-                         'yellow_a': 1000,
-                         'green_a': 4000,
-                         'name': 'День Шаляпина- Алтынсарина'}
-            app = CountdownTimer()
-            root = Frame()
-            app.mainloop()
-            root.mainloop()
-            return data_dict
         elif self.now_time == self.evening and (self.E or self.W)  > 20:
             data_dict = {'red_s':6000,
                          'yellow_s':1000,
@@ -216,14 +203,14 @@ class InfoMessage:
             app.mainloop()
             root.mainloop()
             return data_dict
-        elif self.now_time == self.night:
-            data_dict = {'red_s':7000,
+        else:
+            data_dict = {'red_s':8000,
                          'yellow_s':1000,
                          'green_s':11000,
-                         'red_a':14000,
+                         'red_a':15000,
                          'yellow_a': 1000,
-                         'green_a': 3000,
-                         'name': 'Ночь Шаляпина- Алтынсарина'}
+                         'green_a': 4000,
+                         'name': 'День Шаляпина- Алтынсарина'}
             app = CountdownTimer()
             root = Frame()
             app.mainloop()
@@ -247,9 +234,9 @@ def main(traffic: InfoMessage) -> None:
 if __name__ == '__main__':
     """водимые данные"""
     packages = [
-        ('PAC', [15, 21, 10, 8, datetime.time(8)]),
-        ('PAC_2', [42, 10, 75, 8, datetime.time(10)]),
-        ('PAC_3', [12, 45, 30, 12, datetime.time(17)]),
+        ('PAC', [15, 10, 10, 8, datetime.time(8)]),
+        ('PAC_2', [10, 10, 75, 8, datetime.time(10)]),
+        ('PAC_3', [12, 60, 30, 12, datetime.time(17)]),
     ]
 
     for workout_type, data in packages:
